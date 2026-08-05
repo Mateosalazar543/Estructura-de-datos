@@ -1,0 +1,55 @@
+====================================================================
+ Taller 1 - Complejidad: Nomina
+ Instrucciones de compilacion y ejecucion
+====================================================================
+
+1) COMPILACION
+--------------------------------------------------------------------
+Requiere un compilador con soporte C++17 (g++ >= 7).
+
+Programa de Nomina:
+    g++ -std=c++17 -O2 main.cpp nomina.cpp -o nomina_exe
+
+
+2) CAMBIAR EL ALGORITMO DE ORDENAMIENTO
+--------------------------------------------------------------------
+El programa siempre ordena usando el algoritmo que este activo en
+nomina.h. Las tres cabeceras (selection-sort.h, merge-sort.h y
+quick-sort.h) definen una funcion sort() con el mismo nombre y
+firma, asi que para cambiar de algoritmo NO hay que tocar nomina.cpp
+ni main.cpp: basta con editar la linea de #include en nomina.h.
+
+Por defecto nomina.h tiene:
+    #include "selection-sort.h"
+
+Para medir mergesort, reemplace esa linea por:
+    #include "merge-sort.h"
+
+Para medir quicksort:
+    #include "quick-sort.h"
+
+Despues de cada cambio, guarde el archivo, vuelva a compilar con el
+mismo comando del paso 1) y ejecute de nuevo.
+
+
+3) EJECUCION - NOMINA
+--------------------------------------------------------------------
+Uso: ./nomina_exe <archivo.csv> [horasMinimas] [num_registros]
+
+    <archivo.csv>   : archivo CSV con los datos de nomina
+    [horasMinimas]  : umbral de horas mensuales para la alerta
+                      (opcional, por defecto 120)
+    [num_registros] : cantidad maxima de empleados a leer desde el
+                      archivo (opcional, util para pruebas rapidas)
+
+Ejemplos:
+    ./nomina_exe data/nomina_prueba_10.csv
+    ./nomina_exe data/nomina_prueba_10.csv 120
+    ./nomina_exe data/nomina_prueba_100.csv 120 20
+
+El programa imprime:
+    - El numero de empleados procesados.
+    - El tiempo de ordenamiento + generacion de la alerta, en
+      microsegundos (no incluye la lectura del archivo).
+    - La lista de empleados que no alcanzaron el minimo de horas
+      configurado.
